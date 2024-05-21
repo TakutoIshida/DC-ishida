@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>天気情報</title>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container form {
+            margin-right: 30px; /* ボタン間の間隔を広くする */
+        }
+    </style>
+</head>
+<body>
+    <h1 th:text="'天気情報 - ' + ${prefecture}"></h1>
+    <div th:if="${description}">
+        <p>天気: <span th:text="${description}"></span></p>
+        <p>温度: <span th:text="${temperature}"></span>°C</p>
+        <p>湿度: <span th:text="${humidity}"></span>%</p>
+    </div>
+    <div th:if="${error}">
+        <p><span th:text="${error}"></span></p>
+    </div>
+    <a href="/">戻る</a>
+    
+    <div class="button-container">
+        <!-- スポットページへのリンク -->
+        <form action="/spots" method="get">
+            <input type="hidden" name="prefecture" th:value="${prefecture}" />
+            <button type="submit">スポットを見る</button>
+        </form>
+        
+        <!-- グルメページへのリンク -->
+        <form action="/restaurants" method="get">
+            <input type="hidden" name="prefecture" th:value="${prefecture}" />
+            <button type="submit">グルメを見る</button>
+        </form>
+    </div>
+</body>
+</html>
