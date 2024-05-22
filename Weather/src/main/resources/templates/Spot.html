@@ -1,0 +1,37 @@
+</html><!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>スポット情報</title>
+    <style>
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container form {
+            margin-right: 30px; /* ボタン間の間隔を広くする */
+        }
+    </style>
+</head>
+<body>
+    <h1 th:text="'スポット情報 - ' + ${prefecture}"></h1>
+    <div th:if="${#lists.isEmpty(spot)}">
+        <p>この都道府県にはスポット情報がありません。</p>
+    </div>
+    <div th:if="${not #lists.isEmpty(spot)}">
+        <ul>
+            <li th:each="item : ${spot}" th:text="${item}"></li>
+        </ul>
+    </div>
+    <a href="/">戻る</a>
+    
+    <div class="button-container">
+        <!-- グルメへのリンク -->
+        <form action="/gourmet" method="get">
+            <input type="hidden" name="prefecture" th:value="${prefecture}" />
+            <button type="submit">グルメを見る</button>
+        </form>
+    </div>
+</body>
+</html>
